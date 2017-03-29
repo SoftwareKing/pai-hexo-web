@@ -1,0 +1,9 @@
+<%- partial('_partial/banner',{post: page}) %>
+<div class="wrapper">
+    <article>
+    <%- partial('_widget/title',{post: post,index: false,class_name: 'post-title'})%>
+    <div class='post-body mb'>
+        <%- post.content %>
+    </div>
+    </article>
+</div>

@@ -1,0 +1,51 @@
+# Header
+menu:
+  团队博客: /archives
+  时间年记: /timeline
+  关于我们: /about
+index_url: /
+rss: /atom.xml
+
+# 页面标题
+keywords: 派团队、青岛工学院派团队、pai.loulan.me、楼兰志、芝麻开门、青岛工学院、ICAN大赛
+
+# 页面标题
+archives_title: 团队博客
+
+# Content
+excerpt_link: Read More
+fancybox: true
+
+# Sidebar
+sidebar: right
+widgets:
+- category
+- tag
+- tagcloud
+- archive
+- recent_posts
+
+# display widgets at the bottom of index pages (pagination == 2)
+index_widgets:
+# - category
+# - tagcloud
+# - archive
+
+# widget behavior
+archive_type: 'monthly'
+show_count: false
+
+# Miscellaneous
+google_analytics:
+favicon: /favicon.png
+twitter:
+google_plus:
+fb_admins:
+fb_app_id:
+
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repo: http://git.coding.net/lou-lan/lou-lan.git
+  branch: master

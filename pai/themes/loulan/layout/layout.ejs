@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="<%= theme.keywords %>">
+    <meta name="description" content="<%= config.description %>">
+    <meta name="author" content="<%= config.author %>"> 
+    <%
+      var title = page.title;
+      if (is_archive()){
+          title = theme.archives_title || 'Archives';
+          if (is_month()){
+          title += ': ' + page.year + '/' + page.month;
+          } else if (is_year()){
+          title += ': ' + page.year;
+          }
+      } else if (is_category()){
+          title = (theme.categories_title || 'Categories') + ': ' + page.category;
+      } else if (is_tag()){
+          title = (theme.tags_title || 'Tags') + ': ' + page.tag;
+      }
+    %>
+    <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
+    <!-- Bootstrap core CSS -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入自定义的CSS -->
+    <%- css('css/style') %>
+    <%- css('js/google-code-prettify/tomorrow-night-eighties.min') %>
+</head>
+<body>
+  <!-- 导航 -->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+          <span class="sr-only">切换导航</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="\">
+          <img id="logo" alt="Brand" width="130" height="40" src="/img/logo-white.png">
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="example-navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <% for (var i in theme.menu){ %>
+            <li><a href="<%- url_for(theme.menu[i]) %>" class=""><p><%= i %></p></a></li>
+          <% } %>  
+        </ul>          
+      </div>
+    </div>
+  </nav>
+  <!-- body -->
+  <%- body -%>
+  <!-- 页脚 -->
+  <footer id="footer">
+    <div class="container">
+      <p class="banquan">© 2014-2017 青岛工学院派团队</p>
+    </div>
+  </footer>
+  <!-- banner -->
+  <!-- jQuery (引入必要的JavaScript代码) -->
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+  <%- js('js/lib') %>
+  <%- js('js/google-code-prettify/prettify') %>
+  <%- js('js/module') %>
+  <%- js('js/script') %>
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type='text/javascript'>
+    //代码高亮
+    $(document).ready(function(){
+      $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+        prettyPrint();
+    });
+  </script>
+  <script type='text/javascript'>
+    // 控制页脚始终在底部
+    window.onload = function() {
+        function ct() {
+            return document.compatMode == "BackCompat" ? document.body.clientHeight: document.documentElement.clientHeight;
+        }
+        var f = document.getElementById('footer'); (window.onresize = function() {
+            f.style.position = document.body.scrollHeight > ct() ? 'relative': 'absolute';
+        })();
+        window.onresize = adjuest;
+    }
+    //检测屏幕分辨率大小，切换logo和banner
+    adjuest();
+    function adjuest() {
+        var PingMuFenBianLv = document.body.clientWidth
+        if (PingMuFenBianLv <= 768) {
+            logoSrc = document.getElementById("logo") // 找到元素
+            logoSrc.src = "/img/logo.png"; // 改变样式
+            try {
+                document.getElementById("banner-1").src = "banner/banner-mobile-1.png";
+                document.getElementById("banner-2").src = "banner/banner-mobile-2.jpg";
+                document.getElementById("banner-3").src = "banner/banner-mobile-3.jpg";
+            } catch(error) {}
+        } else {
+            logoSrc = document.getElementById("logo") // 找到元素
+            logoSrc.src = "/img/logo-white.png"; // 改变样式
+            try {
+                document.getElementById("banner-1").src = "banner/banner-pc-1.png";
+                document.getElementById("banner-2").src = "banner/banner-pc-2.jpg";
+                document.getElementById("banner-3").src = "banner/banner-pc-3.jpg";
+            } catch(error) {}
+        }
+    }
+  </script>
+</body>
+</html>
